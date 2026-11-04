@@ -646,7 +646,9 @@ function readCfg(){
   return {name:"Маша",g:"f",age:6,helper:"cat",adult:"mama",preview:true};
 }
 const CFG=readCfg();
-const H=HELPERS[CFG.helper]||HELPERS.cat;
+const ALT={cat:{m:'котёнок',f:'кошечка'},dog:{m:'щенок',f:'собачка'},bunny:{m:'зайчонок',f:'зайка'},fox:{m:'лисёнок',f:'лисичка'},unicorn:{m:'единорожик',f:'единорожка'},dragon:{m:'дракончик',f:'драконочка'},penguin:{m:'пингвинёнок',f:'пингвиночка'},bear:{m:'медвежонок',f:'медвежонок'},owl:{m:'совёнок',f:'совушка'}};
+const H0=HELPERS[CFG.helper]||HELPERS.cat;const H=Object.assign({},H0);
+if(CFG.hg&&CFG.hg!==H0.g&&ALT[CFG.helper]&&ALT[CFG.helper][CFG.hg]!==H0.hs){H.g=CFG.hg;H.hs=ALT[CFG.helper][CFG.hg]}
 const V={toy:CFG.toy||'',name:CFG.name, nick:CFG.nick||CFG.name, hn:CFG.hname||H.hn, hs:H.hs, adultI:ADULTS[CFG.adult]||"мамой"};
 const G={c:CFG.g==='m'?'m':'f', h:H.g, t:CFG.tg||'m'};
 const GI={m:0,f:1,n:2,p:3};
