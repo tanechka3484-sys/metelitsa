@@ -716,7 +716,7 @@ function openDay(d){
   CUR=d;const st=STORY[d-1],tk=TASKS[d-1];
   $('dTitle').textContent=`${d} декабря`;$('dSub').textContent=`Глава ${d} · ${st.t}`;
   $('sTitle').textContent=st.t;
-  const im=CFG.noimg?null:((window.EMBED_IMG&&EMBED_IMG[d])||((typeof IMAGES!=='undefined')&&IMAGES[d]));const ok=im&&(!im.g||im.g===G.c);
+  const im=CFG.noimg?null:((window.EMBED_IMG&&EMBED_IMG[d])||((typeof IMAGES!=='undefined')&&IMAGES[d]));const ok=im&&(!im.g||(im.g===G.c&&(CFG.helper||'cat')==='cat'));
   const mid=ok&&im.pos!=='top'&&im.pos!=='end';const end=ok&&im.pos==='end';$('sImg').style.display=ok&&!end&&!mid?'block':'none';$('sImgEnd').style.display=end?'block':'none';if(ok&&!mid)$(end?'sImgEnd':'sImg').src=im.src;
   const MID=mid?im:null;
   $('sText').innerHTML=st.p.filter(p=>V.toy||!p.includes('{toy}')).map(p=>`<p>${T(p).replace(new RegExp('('+V.name+'|'+V.nick+')','g'),'<b class="nm">$1</b>')}</p>`).join('');
