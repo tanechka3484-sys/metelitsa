@@ -22,7 +22,7 @@ input:focus{outline:none;border-color:var(--red)}
 .opt{flex:1;border:2px solid #ddd5ee;border-radius:14px;padding:11px 6px;text-align:center;cursor:pointer;font-weight:800;background:#fff;user-select:none}
 .opt input{display:none}
 .opt:has(input:checked){border-color:var(--red);background:#fff1ef}
-.ages{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ages{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .helpers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .helpers .opt b{display:block;font-size:32px;line-height:1.2}
 .helpers .opt{font-size:13px;padding:8px 4px}
@@ -51,7 +51,7 @@ input:focus{outline:none;border-color:var(--red)}
    <label class="opt"><input type="radio" name="g" value="мальчик">👦 Мальчик</label>
   </div>
 
-  <label class="q">4. Возраст</label>
+  <label class="q">4. Возраст <span style="font-weight:400;opacity:.7">(сказка для детей 3–8 лет)</span></label>
   <div class="ages" id="ages"></div>
 
   <label class="q">5. Помощник в сказке</label>
@@ -76,7 +76,7 @@ input:focus{outline:none;border-color:var(--red)}
 </div>
 <script>
 const $=id=>document.getElementById(id);
-$('ages').innerHTML=[3,4,5,6,7,8,9,10].map(a=>`<label class="opt"><input type="radio" name="age" value="${a}">${a}</label>`).join('');
+$('ages').innerHTML=[3,4,5,6,7,8].map(a=>`<label class="opt"><input type="radio" name="age" value="${a}">${a}</label>`).join('');
 const H=[["🐱","кошечка"],["🐶","щенок"],["🐰","зайчонок"],["🦊","лисичка"],["🦄","единорожка"],["🐲","дракончик"],["🐧","пингвинёнок"],["🐻","медвежонок"],["🦉","совушка"]];
 $('helpers').innerHTML=H.map(([e,n])=>`<label class="opt"><input type="radio" name="h" value="${n}"><b>${e}</b>${n}</label>`).join('');
 const val=n=>{const r=document.querySelector(`[name=${n}]:checked`);return r?r.value:''};
