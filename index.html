@@ -718,7 +718,7 @@ function openDay(d){
   CUR=d;const st=STORY[d-1],tk=TASKS[d-1];
   $('dTitle').textContent=`${d} декабря`;$('dSub').textContent=`Глава ${d} · ${st.t}`;
   $('sTitle').textContent=st.t;
-  const SK=G.c+'_'+(CFG.helper||'cat'),SS=(typeof SETS!=='undefined')&&SETS[SK],SI=SS&&SS.d[d]?{pos:SS.d[d],src:SS.dir+'d'+d+'.webp'}:null;
+  const SK=G.c+'_'+(CFG.helper||'cat'),SS=(typeof SETS!=='undefined')&&SETS[SK],SI=SS&&(d in SS.d)?{pos:SS.d[d],src:SS.dir+'d'+d+'.webp'}:null;
   const im=CFG.noimg?null:((window.EMBED_IMG&&EMBED_IMG[d])||SI||((typeof IMAGES!=='undefined')&&IMAGES[d]));const ok=im&&(im===SI||!im.g||(im.g===G.c&&(CFG.helper||'cat')==='cat'));
   const mid=ok&&im.pos!=='top'&&im.pos!=='end';const end=ok&&im.pos==='end';$('sImg').style.display=ok&&!end&&!mid?'block':'none';$('sImgEnd').style.display=end?'block':'none';if(ok&&!mid)$(end?'sImgEnd':'sImg').src=im.src;
   const MID=mid?im:null;
