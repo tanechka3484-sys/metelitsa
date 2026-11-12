@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d2a5a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Календарь">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Тайна Метелицы — новогодний календарь</title>
@@ -90,6 +98,15 @@ h1{color:#fff;text-align:center;font-weight:900;font-size:26px;margin:4px 0 4px}
 </style>
 </head>
 <body>
+<div id="instBox" style="display:none;position:fixed;inset:0;z-index:60;background:rgba(10,14,35,.85);align-items:center;justify-content:center;padding:20px">
+ <div style="background:#fffaf3;border-radius:22px;padding:22px 20px;max-width:380px;color:#2b2340;font-size:17px;line-height:1.6;box-shadow:0 12px 34px rgba(0,0,0,.4)">
+  <div style="font-weight:900;font-size:21px;margin-bottom:8px">📲 Календарь на главный экран</div>
+  <div id="instTxt"></div>
+  <div style="margin-top:10px;color:#7a6f92;font-size:15px">Появится иконка — календарь будет открываться как приложение, во весь экран.</div>
+  <button id="instClose" class="btn" style="margin-top:14px;width:100%;justify-content:center;text-align:center">Понятно</button>
+ </div>
+</div>
+
 <canvas id="snow"></canvas>
 <div class="wrap">
  <section id="cal">
@@ -100,6 +117,7 @@ h1{color:#fff;text-align:center;font-weight:900;font-size:26px;margin:4px 0 4px}
   <div class="pre" id="pre"></div>
   <div class="grid" id="grid"></div>
   <div class="row" style="margin-top:16px"><button class="btn light" id="treeBtn">🎄 Моя ёлка</button></div>
+  <div class="row" style="margin-top:10px"><button class="btn light" id="installBtn">📲 Добавить на главный экран</button></div>
  </section>
 
  <section id="day">
@@ -989,7 +1007,9 @@ const ADULTS={mama:"мамой",papa:"папой",babushka:"бабушкой",de
 function readCfg(){
   if(window.EMBED_CFG) return window.EMBED_CFG;
   try{const q=new URLSearchParams(location.search).get('c');
-    if(q){const b=q.replace(/-/g,'+').replace(/_/g,'/');return JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(b),c=>c.charCodeAt(0))))}}catch(e){}
+    if(q){const b=q.replace(/-/g,'+').replace(/_/g,'/');const c=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(b),c=>c.charCodeAt(0))));try{localStorage.setItem('cal_cfg',q)}catch(e){}return c}
+    // запуск с главного экрана: берём календарь, который открывали по ссылке
+    if(new URLSearchParams(location.search).get('app')){const s=localStorage.getItem('cal_cfg');if(s){const b=s.replace(/-/g,'+').replace(/_/g,'/');return JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(b),c=>c.charCodeAt(0))))}}}catch(e){}
   return {name:"Маша",g:"f",age:6,helper:"cat",adult:"mama",preview:true};
 }
 const CFG=readCfg();
@@ -1186,6 +1206,25 @@ const GAMES={
 $('letterBtn').onclick=()=>downloadLetter(CUR===4?'wish':'from');
 $('letterClose').onclick=()=>{$('letterBox').style.display='none'};
 drawCal();show('cal');
+
+// ===== Установка на главный экран =====
+let INSTALL=null;
+(function(){
+ const standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone;
+ const btn=$('installBtn');if(!btn)return;
+ if(standalone){btn.style.display='none';return}
+ if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+ addEventListener('beforeinstallprompt',e=>{e.preventDefault();INSTALL=e});
+ addEventListener('appinstalled',()=>{btn.style.display='none';toast('Готово! Календарь на главном экране 🎉')});
+ const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+ btn.onclick=async()=>{
+  if(INSTALL){INSTALL.prompt();const r=await INSTALL.userChoice.catch(()=>null);INSTALL=null;return}
+  $('instTxt').innerHTML=ios
+   ?'1. Нажмите внизу кнопку <b>«Поделиться»</b> <span style="font-size:22px">⬆️</span><br>2. Выберите <b>«На экран „Домой“»</b><br>3. Нажмите <b>«Добавить»</b>'
+   :'1. Нажмите в браузере меню <b>⋮</b> (три точки вверху)<br>2. Выберите <b>«Добавить на главный экран»</b> или <b>«Установить приложение»</b><br>3. Подтвердите';
+  $('instBox').style.display='flex'};
+ $('instClose').onclick=()=>$('instBox').style.display='none';
+})();
 
 </script>
 </body>
