@@ -182,11 +182,12 @@ footer a{color:#fff}
   <label class="q">Как к вам обращаться <small>(по желанию)</small></label>
   <input type="text" id="parent" placeholder="Ваше имя" autocomplete="off">
   <a class="b sky" id="tgBtn" href="#" style="margin-top:18px">✈️ Отправить в Telegram</a>
+  <a class="b" id="maxBtn" href="#" style="margin-top:10px;background:linear-gradient(135deg,#3d6bff,#8a3dff);display:none">💬 Отправить в MAX</a>
   <a class="b red" id="mailBtn" href="#" style="margin-top:10px">✉️ Отправить на почту</a>
   <button class="b lav" id="copyBtn" style="margin-top:10px;width:100%">📋 Скопировать ответы</button>
   <p class="err" id="err"></p>
   <div class="prev" id="prev"></div>
-  <p class="note">Ответы откроются в Telegram готовым сообщением — останется нажать «Отправить».</p>
+  <p class="note">В Telegram ответы откроются готовым сообщением. В MAX они скопируются — вставьте их в чат и отправьте.</p>
 </div>
 
 <h2>Вопросы</h2>
@@ -199,7 +200,7 @@ footer a{color:#fff}
 </div>
 
 <footer>
- Вопросы и заказ: <a href="https://t.me/tatianapugach" target="_blank" rel="noopener">Telegram @tatianapugach</a> · <a href="mailto:sweet0902@rambler.ru">sweet0902@rambler.ru</a><br>
+ Вопросы и заказ: <a href="https://t.me/tatianapugach" target="_blank" rel="noopener">Telegram @tatianapugach</a> · <a href="https://max.ru/u/f9LHodD0cOK7wCaeDaW1Rs9cLTotxSE1H2CfTecvOtn8wZXtSq3EFzhfWlM" target="_blank" rel="noopener">MAX</a> · <a href="mailto:sweet0902@rambler.ru">sweet0902@rambler.ru</a><br>
  Сделано с любовью для маленьких волшебников ❄️
 </footer>
 </div>
@@ -233,6 +234,12 @@ function text(){
 function show(t){$('prev').style.display='block';$('prev').textContent=t}
 $('tgBtn').onclick=e=>{const t=text();if(!t){e.preventDefault();return}show(t);try{navigator.clipboard.writeText(t)}catch(x){}
  $('tgBtn').href='https://t.me/tatianapugach?text='+encodeURIComponent(t)};
+// MAX: ссылка на профиль Татьяны в MAX (max.ru/u/...). Пока пусто — кнопка скрыта.
+const MAX_URL='https://max.ru/u/f9LHodD0cOK7wCaeDaW1Rs9cLTotxSE1H2CfTecvOtn8wZXtSq3EFzhfWlM';
+if(MAX_URL){$('maxBtn').style.display='flex';$('maxBtn').href=MAX_URL;$('maxBtn').target='_blank'}
+$('maxBtn').onclick=async e=>{const t=text();if(!t){e.preventDefault();return}show(t);
+ try{await navigator.clipboard.writeText(t)}catch(x){}
+ $('err').style.color='#2f8f73';$('err').textContent='Ответы скопированы! В MAX нажмите «Написать», вставьте и отправьте.';setTimeout(()=>{$('err').style.color=''},6000)};
 $('mailBtn').onclick=e=>{const t=text();if(!t){e.preventDefault();return}show(t);
  $('mailBtn').href='mailto:sweet0902@rambler.ru?subject='+encodeURIComponent('Анкета «'+val('st')+'» — '+$('name').value.trim())+'&body='+encodeURIComponent(t)};
 $('copyBtn').onclick=async()=>{const t=text();if(!t)return;show(t);
