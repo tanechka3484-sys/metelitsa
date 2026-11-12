@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Именные новогодние адвент-календари для детей</title>
+<meta name="description" content="Новогодняя сказка на 31 день, где ваш ребёнок — главный герой. Раскраски, задания и мини-игры каждый день.">
+<meta property="og:title" content="Именной новогодний адвент-календарь для ребёнка">
+<meta property="og:description" content="Сказка на 31 день, где ваш ребёнок — главный герой">
+<meta property="og:image" content="metel-kot.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--night:#1d2a5a;--night2:#2c3d7a;--snow:#fffaf3;--red:#e2483d;--gold:#f6c445;--ink:#2b2340;--lav:#efe6ff;--mint:#5fc8a8;--sky:#2aa3e0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:var(--night);background-image:radial-gradient(ellipse at top,var(--night2),var(--night) 60%);min-height:100vh;overflow-x:hidden}
+#snow{position:fixed;inset:0;pointer-events:none;z-index:0}
+.wrap{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:22px 16px 60px}
+.hero{text-align:center;color:#fff;padding:26px 6px 10px}
+.hero .em{font-size:46px;letter-spacing:6px}
+.hero h1{font-weight:900;font-size:clamp(28px,6vw,46px);line-height:1.1;margin:10px 0 12px}
+.hero p{color:#c9d3ff;font-weight:700;font-size:clamp(16px,3.4vw,20px);line-height:1.5;margin:0 auto;max-width:640px}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;text-decoration:none;font-weight:900;font-size:18px;padding:14px 26px;border-radius:30px;margin-top:20px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.2),0 8px 24px rgba(226,72,61,.35)}
+.cta.ghost{background:transparent;border:2px solid #c9d3ff;box-shadow:none;margin-left:6px}
+h2{color:#fff;text-align:center;font-weight:900;font-size:clamp(24px,5vw,32px);margin:46px 0 6px}
+.h2sub{color:#c9d3ff;text-align:center;font-weight:700;margin:0 0 20px}
+.prods{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:760px){.prods{grid-template-columns:1fr 1fr}}
+.prod{background:var(--snow);border-radius:24px;overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.3);display:flex;flex-direction:column}
+.cover{position:relative;aspect-ratio:16/10;background:#0f1838;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover .space{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,#3b4fa0,#121a40 70%);position:relative}
+.cover .space svg.rk{height:92%;width:auto;max-width:70%;position:relative;z-index:1}
+.cover .space i{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;opacity:.8}
+.tag{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.92);border-radius:20px;padding:6px 12px;font-weight:900;font-size:14px}
+.pb{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.pb h3{margin:0 0 4px;font-size:24px;font-weight:900}
+.pb .for{color:#7a6f92;font-weight:800;margin:0 0 10px}
+.pb p{margin:0 0 12px;line-height:1.5;font-size:16px}
+.pb ul{margin:0 0 14px;padding-left:0;list-style:none}
+.pb li{margin:6px 0;line-height:1.4}
+.btns{margin-top:auto;display:grid;gap:10px}
+.b{display:flex;align-items:center;justify-content:center;gap:8px;border:none;cursor:pointer;font-family:inherit;font-weight:900;font-size:17px;padding:13px;border-radius:16px;color:#fff;text-decoration:none;box-shadow:inset 0 -4px 0 rgba(0,0,0,.18)}
+.b.red{background:var(--red)}.b.mint{background:var(--mint)}.b.lav{background:var(--lav);color:var(--ink)}.b.sky{background:var(--sky)}
+.steps{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:760px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{background:var(--snow);border-radius:20px;padding:18px;text-align:center;box-shadow:0 10px 26px rgba(0,0,0,.22)}
+.step b{display:block;font-size:36px}
+.step h4{margin:6px 0 4px;font-size:18px;font-weight:900}
+.step p{margin:0;font-size:15px;line-height:1.45;color:#5a5170}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(min-width:760px){.feat{grid-template-columns:repeat(3,1fr)}}
+.f{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:14px;color:#fff}
+.f b{font-size:28px;display:block}
+.f h4{margin:4px 0 2px;font-size:16px;font-weight:900}
+.f p{margin:0;font-size:14px;color:#c9d3ff;line-height:1.4;font-weight:700}
+.helpersRow{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:6px}
+.helpersRow span{background:var(--snow);border-radius:16px;padding:8px 12px;font-weight:800;font-size:15px}
+.helpersRow span b{font-size:22px;margin-right:4px}
+.vid{position:fixed;inset:0;background:rgba(8,12,30,.92);z-index:50;display:none;align-items:center;justify-content:center;padding:16px}
+.vid.on{display:flex}
+.vid video{max-height:88vh;max-width:100%;border-radius:18px;background:#000}
+.vid button{position:absolute;top:14px;right:14px;background:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:22px;cursor:pointer}
+.formcard{background:var(--snow);border-radius:24px;padding:22px 18px;box-shadow:0 12px 34px rgba(0,0,0,.3);max-width:620px;margin:0 auto}
+label.q{display:block;font-weight:900;font-size:17px;margin:16px 0 6px}
+label.q:first-child{margin-top:0}
+.q small{font-weight:700;color:#7a6f92}
+input[type=text]{width:100%;font:inherit;font-size:17px;padding:12px 14px;border:2px solid #ddd5ee;border-radius:14px;background:#fff}
+input:focus{outline:none;border-color:var(--red)}
+.seg{display:flex;gap:8px}
+.opt{flex:1;border:2px solid #ddd5ee;border-radius:14px;padding:11px 6px;text-align:center;cursor:pointer;font-weight:800;background:#fff;user-select:none}
+.opt input{display:none}
+.opt:has(input:checked){border-color:var(--red);background:#fff1ef}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.helpers .opt b{display:block;font-size:32px;line-height:1.2}
+.helpers .opt{font-size:13px;padding:8px 4px}
+.story .opt{font-size:15px;line-height:1.3}
+.story .opt small{display:block;font-weight:700;color:#7a6f92;font-size:12px}
+.err{color:var(--red);font-weight:800;text-align:center;min-height:22px;margin:8px 0 0}
+.note{font-size:14px;color:#7a6f92;text-align:center;margin:10px 0 0;line-height:1.45}
+.prev{background:var(--lav);border-radius:14px;padding:12px 14px;font-size:15px;white-space:pre-line;margin-top:10px;display:none}
+.faq{max-width:720px;margin:0 auto}
+.faq details{background:var(--snow);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.faq summary{font-weight:900;cursor:pointer;font-size:17px}
+.faq p{margin:8px 0 0;line-height:1.5}
+footer{text-align:center;color:#c9d3ff;font-weight:700;margin-top:40px;line-height:1.7}
+footer a{color:#fff}
+</style>
+</head>
+<body>
+<canvas id="snow"></canvas>
+<div class="wrap">
+
+<section class="hero">
+ <div class="em">🎄✨🎁</div>
+ <h1>Новогодняя сказка,<br>где ваш ребёнок — главный герой</h1>
+ <p>Именной адвент-календарь на 31 день декабря. Каждое утро — новая глава сказки, раскраска и задание. Без скачивания и регистрации: просто ссылка на телефоне или планшете.</p>
+ <a class="cta" href="#zakaz">📝 Заказать календарь</a><a class="cta ghost" href="#skazki">Смотреть сказки</a>
+</section>
+
+<h2 id="skazki">Выберите сказку</h2>
+<p class="h2sub">Для детей 3–7 лет · сложность заданий зависит от возраста</p>
+<div class="prods">
+ <article class="prod">
+  <div class="cover"><img src="metel-kot.webp" alt="Иллюстрация к сказке «Тайна Метелицы»"><span class="tag">❄️ Для девочек</span></div>
+  <div class="pb">
+   <h3>Тайна Метелицы</h3>
+   <p class="for">Волшебная зимняя сказка</p>
+   <p>Озорная Метелица украла краски у ёлочных игрушек — и город стал белым. Каждый день ребёнок с верным помощником возвращает цвет одной игрушке, помогает жителям города и в конце дарит Метелице самое главное — дружбу.</p>
+   <ul><li>🎨 30 раскрасок — игрушки собираются на большую ёлку</li><li>🖼 Картинки к каждой главе</li><li>💌 Письмо Деду Морозу и ответ от него (PDF)</li></ul>
+   <div class="btns">
+    <button class="b lav" data-v="metel.mp4">▶️ Видео: как это работает</button>
+    <a class="b mint" href="../" target="_blank" rel="noopener">🎁 Попробовать 3 дня бесплатно</a>
+    <a class="b red" href="#zakaz" data-story="metel">📝 Заказать «Метелицу»</a>
+   </div>
+  </div>
+ </article>
+ <article class="prod">
+  <div class="cover"><div class="space" id="spaceCov"><svg viewBox="0 0 300 440" class="rk" xmlns="http://www.w3.org/2000/svg">
+   <line x1="150" y1="27" x2="150" y2="50" stroke="#2b2340" stroke-width="3"/>
+   <rect x="40" y="176" width="24" height="150" rx="10" fill="#f6c445" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="236" y="176" width="24" height="150" rx="10" fill="#3fa34d" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M40 182 Q52 132 64 182Z" fill="#5fc8a8" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M236 182 Q248 132 260 182Z" fill="#9b6ee8" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M100 236 L64 286 L64 322 L100 310Z" fill="#f6c445" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M200 236 L236 286 L236 322 L200 310Z" fill="#3fa34d" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="106" y="324" width="88" height="22" rx="4" fill="#3fa34d" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M112 346 L132 346 L136 366 L108 366Z" fill="#e2483d" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M140 346 L160 346 L164 366 L136 366Z" fill="#9b6ee8" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M168 346 L188 346 L192 366 L164 366Z" fill="#f6c445" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M40 300 L20 344 L42 330Z M260 300 L280 344 L258 330Z" fill="#e2483d" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M140 50 Q106 84 100 124 L200 124 Q194 84 160 50Z" fill="#e2483d" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="100" y="124" width="50" height="40" rx="0" fill="#ff8fb1" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="150" y="124" width="50" height="40" rx="0" fill="#ff9a3c" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="100" y="164" width="50" height="40" rx="0" fill="#5fc8a8" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="150" y="164" width="50" height="40" rx="0" fill="#e2483d" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="100" y="204" width="50" height="40" rx="0" fill="#4a90e2" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="150" y="204" width="50" height="40" rx="0" fill="#ff8fb1" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="100" y="244" width="50" height="40" rx="0" fill="#ff9a3c" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="150" y="244" width="50" height="40" rx="0" fill="#3fa34d" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="100" y="284" width="50" height="40" rx="0" fill="#5fc8a8" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="150" y="284" width="50" height="40" rx="0" fill="#9b6ee8" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><rect x="96" y="258" width="108" height="12" rx="4" fill="#4a90e2" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><circle cx="150" cy="150" r="17" fill="#5fc8a8" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><circle cx="150" cy="198" r="13" fill="#ff8fb1" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><circle cx="150" cy="236" r="10" fill="#ff9a3c" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M150.0 277.0L154.1 288.3L166.2 288.7L156.7 296.2L160.0 307.8L150.0 301.0L140.0 307.8L143.3 296.2L133.8 288.7L145.9 288.3Z" fill="#ff8fb1" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M150.0 80.0L152.9 88.0L161.4 88.3L154.8 93.5L157.1 101.7L150.0 97.0L142.9 101.7L145.2 93.5L138.6 88.3L147.1 88.0Z" fill="#9b6ee8" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><circle cx="150" cy="20" r="7" fill="#4a90e2" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/><path d="M151 26 L178 32 L151 39Z" fill="#4a90e2" stroke="#2b2340" stroke-width="3" stroke-linejoin="round"/>
+  </svg></div><span class="tag">🚀 Для мальчиков</span></div>
+  <div class="pb">
+   <h3>Звёздный рейс</h3>
+   <p class="for">Космическое приключение</p>
+   <p>Ракета Деда Мороза рассыпалась на 30 деталей по всей галактике! Ребёнок с помощником летит на Луну, Марс и Сатурн, находит по одной детали в день — и 31 декабря сам запускает ракету с подарками.</p>
+   <ul><li>🚀 Ракета собирается по деталям прямо на экране</li><li>🪐 Лунные зайцы, марсиане, кометёнок и робот Винтик</li><li>💌 Письмо Деду Морозу и ответ от него (PDF)</li></ul>
+   <div class="btns">
+    <button class="b lav" data-v="kosmos.mp4">▶️ Видео: как это работает</button>
+    <a class="b mint" href="../kosmos/" target="_blank" rel="noopener">🎁 Попробовать 3 дня бесплатно</a>
+    <a class="b red" href="#zakaz" data-story="space">📝 Заказать «Звёздный рейс»</a>
+   </div>
+  </div>
+ </article>
+</div>
+
+<h2>Как это работает</h2>
+<p class="h2sub">От анкеты до первого окошка — всего 4 шага</p>
+<div class="steps">
+ <div class="step"><b>📝</b><h4>Анкета</h4><p>Имя ребёнка, возраст и любимый помощник — 2 минуты</p></div>
+ <div class="step"><b>✨</b><h4>Я собираю календарь</h4><p>Сказка, задания и картинки — под вашего ребёнка</p></div>
+ <div class="step"><b>🔗</b><h4>Вы получаете ссылку</h4><p>До 1 декабря. Открывается на телефоне или планшете</p></div>
+ <div class="step"><b>🎁</b><h4>Каждый день — окошко</h4><p>С 1 по 31 декабря, по одному в день</p></div>
+</div>
+
+<h2>Что внутри каждого дня</h2>
+<p class="h2sub">15–20 минут волшебства вместе с ребёнком</p>
+<div class="feat">
+ <div class="f"><b>📖</b><h4>Глава сказки</h4><p>С именем ребёнка и интригой — «а что будет завтра?»</p></div>
+ <div class="f"><b>🎨</b><h4>Раскраска</h4><p>Прямо на экране, пальчиком</p></div>
+ <div class="f"><b>🧩</b><h4>Задание или игра</h4><p>Прогулка, поделка, загадки, лабиринт</p></div>
+ <div class="f"><b>⭐</b><h4>Звёздочка за день</h4><p>И большой финал 31 декабря</p></div>
+ <div class="f"><b>💌</b><h4>Письма</h4><p>Ребёнку от Деда Мороза — можно распечатать</p></div>
+ <div class="f"><b>🎂</b><h4>По возрасту</h4><p>Малышам 3–5 — проще, 6–7 — интереснее</p></div>
+</div>
+
+<h2>Помощник — на выбор</h2>
+<p class="h2sub">Можно дать ему имя — например, как зовут вашего питомца</p>
+<div class="helpersRow"><span><b>🐱</b>кошечка</span><span><b>🐶</b>щенок</span><span><b>🐰</b>зайчонок</span><span><b>🦊</b>лисичка</span><span><b>🦄</b>единорожка</span><span><b>🐲</b>дракончик</span><span><b>🐧</b>пингвинёнок</span><span><b>🐻</b>медвежонок</span><span><b>🦉</b>совушка</span></div>
+
+<h2 id="zakaz">Анкета для заказа</h2>
+<p class="h2sub">Заполните — и отправьте мне в Telegram или на почту</p>
+<div class="formcard">
+  <label class="q">1. Сказка</label>
+  <div class="seg story">
+   <label class="opt"><input type="radio" name="st" value="Тайна Метелицы">❄️ Тайна Метелицы<small>волшебная зимняя</small></label>
+   <label class="opt"><input type="radio" name="st" value="Звёздный рейс">🚀 Звёздный рейс<small>про космос</small></label>
+  </div>
+  <label class="q">2. Имя ребёнка</label>
+  <input type="text" id="name" placeholder="Например: Ксения" autocomplete="off">
+  <label class="q">3. Как зовёте дома <small>(по желанию)</small></label>
+  <input type="text" id="nick" placeholder="Например: Ксюша" autocomplete="off">
+  <label class="q">4. Кто у вас</label>
+  <div class="seg">
+   <label class="opt"><input type="radio" name="g" value="девочка">👧 Девочка</label>
+   <label class="opt"><input type="radio" name="g" value="мальчик">👦 Мальчик</label>
+  </div>
+  <label class="q">5. Возраст</label>
+  <div class="grid3" id="ages"></div>
+  <label class="q">6. Помощник в сказке</label>
+  <div class="grid3 helpers" id="helpers"></div>
+  <label class="q">7. Имя помощника <small>(по желанию)</small></label>
+  <input type="text" id="hname" placeholder="Можно оставить пустым" autocomplete="off">
+  <label class="q">Как к вам обращаться <small>(по желанию)</small></label>
+  <input type="text" id="parent" placeholder="Ваше имя" autocomplete="off">
+  <a class="b sky" id="tgBtn" href="#" style="margin-top:18px">✈️ Отправить в Telegram</a>
+  <a class="b red" id="mailBtn" href="#" style="margin-top:10px">✉️ Отправить на почту</a>
+  <button class="b lav" id="copyBtn" style="margin-top:10px;width:100%">📋 Скопировать ответы</button>
+  <p class="err" id="err"></p>
+  <div class="prev" id="prev"></div>
+  <p class="note">Ответы откроются в Telegram готовым сообщением — останется нажать «Отправить».</p>
+</div>
+
+<h2>Вопросы</h2>
+<div class="faq">
+ <details><summary>Нужно что-то скачивать?</summary><p>Нет. Календарь открывается по ссылке в браузере телефона, планшета или компьютера. Регистрация не нужна.</p></details>
+ <details><summary>Можно открыть все окошки сразу?</summary><p>Нет — в этом волшебство: каждое окошко открывается в свой день декабря, и ребёнок ждёт новую главу.</p></details>
+ <details><summary>Для какого возраста?</summary><p>Для детей 3–7 лет. Сложность игр и заданий подстраивается под возраст из анкеты.</p></details>
+ <details><summary>Сколько времени в день?</summary><p>15–20 минут: прочитать главу, раскрасить игрушку и выполнить задание. Задания на прогулке и дома можно делать вместе.</p></details>
+ <details><summary>Мальчику можно «Метелицу», а девочке — «Космос»?</summary><p>Конечно! Выберите в анкете ту сказку, которая больше понравится ребёнку.</p></details>
+</div>
+
+<footer>
+ Вопросы и заказ: <a href="https://t.me/tatianapugach" target="_blank" rel="noopener">Telegram @tatianapugach</a> · <a href="mailto:sweet0902@rambler.ru">sweet0902@rambler.ru</a><br>
+ Сделано с любовью для маленьких волшебников ❄️
+</footer>
+</div>
+
+<div class="vid" id="vid"><button id="vClose" aria-label="Закрыть">✕</button><video id="vEl" controls playsinline></video></div>
+
+<script>
+const $=id=>document.getElementById(id);
+// звёзды на космической обложке
+(()=>{const c=$('spaceCov');for(let i=0;i<40;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.opacity=.3+Math.random()*.7;c.appendChild(s)}})();
+// видео
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{$('vEl').src=b.dataset.v;$('vid').classList.add('on');$('vEl').play().catch(()=>{})});
+const closeV=()=>{$('vEl').pause();$('vid').classList.remove('on')};$('vClose').onclick=closeV;$('vid').onclick=e=>{if(e.target===$('vid'))closeV()};
+// выбор сказки из карточки
+document.querySelectorAll('[data-story]').forEach(a=>a.addEventListener('click',()=>{const v=a.dataset.story==='space'?'Звёздный рейс':'Тайна Метелицы';document.querySelector(`[name=st][value="${v}"]`).checked=true}));
+// анкета
+$('ages').innerHTML=[3,4,5,6,7].map(a=>`<label class="opt"><input type="radio" name="age" value="${a}">${a} ${a<5?'года':'лет'}</label>`).join('');
+const H=[["🐱","кошечка"],["🐶","щенок"],["🐰","зайчонок"],["🦊","лисичка"],["🦄","единорожка"],["🐲","дракончик"],["🐧","пингвинёнок"],["🐻","медвежонок"],["🦉","совушка"]];
+$('helpers').innerHTML=H.map(([e,n])=>`<label class="opt"><input type="radio" name="h" value="${n}"><b>${e}</b>${n}</label>`).join('');
+document.querySelectorAll('[name=g]').forEach(r=>r.addEventListener('change',()=>{if(!document.querySelector('[name=st]:checked')){const v=r.value==='мальчик'?'Звёздный рейс':'Тайна Метелицы';document.querySelector(`[name=st][value="${v}"]`).checked=true}}));
+const val=n=>{const r=document.querySelector(`[name=${n}]:checked`);return r?r.value:''};
+function text(){
+ const st=val('st'),name=$('name').value.trim(),g=val('g'),age=val('age'),h=val('h');
+ const miss=[];if(!st)miss.push('сказка');if(!name)miss.push('имя');if(!g)miss.push('мальчик или девочка');if(!age)miss.push('возраст');if(!h)miss.push('помощник');
+ if(miss.length){$('err').textContent='Пожалуйста, заполните: '+miss.join(', ');return null}
+ $('err').textContent='';
+ return ['🎄 Анкета: «'+st+'»',
+  'Имя: '+name,'Ласковое имя: '+($('nick').value.trim()||'—'),'Пол: '+g,'Возраст: '+age,
+  'Помощник: '+h,'Имя помощника: '+($('hname').value.trim()||'—'),'Родитель: '+($('parent').value.trim()||'—')].join('\n');
+}
+function show(t){$('prev').style.display='block';$('prev').textContent=t}
+$('tgBtn').onclick=e=>{const t=text();if(!t){e.preventDefault();return}show(t);try{navigator.clipboard.writeText(t)}catch(x){}
+ $('tgBtn').href='https://t.me/tatianapugach?text='+encodeURIComponent(t)};
+$('mailBtn').onclick=e=>{const t=text();if(!t){e.preventDefault();return}show(t);
+ $('mailBtn').href='mailto:sweet0902@rambler.ru?subject='+encodeURIComponent('Анкета «'+val('st')+'» — '+$('name').value.trim())+'&body='+encodeURIComponent(t)};
+$('copyBtn').onclick=async()=>{const t=text();if(!t)return;show(t);
+ try{await navigator.clipboard.writeText(t);$('err').style.color='#2f8f73';$('err').textContent='Скопировано! Вставьте в сообщение и отправьте.'}catch(x){$('err').textContent='Выделите текст ниже и скопируйте вручную'}
+ setTimeout(()=>{$('err').style.color=''},3000)};
+// снег
+(()=>{const c=$('snow'),x=c.getContext('2d');let W,Hh,f=[];const rs=()=>{W=c.width=innerWidth;Hh=c.height=innerHeight};rs();addEventListener('resize',rs);
+ for(let i=0;i<70;i++)f.push({x:Math.random()*W,y:Math.random()*Hh,r:1+Math.random()*2.5,s:.3+Math.random()*.9});
+ (function l(){x.clearRect(0,0,W,Hh);x.fillStyle='rgba(255,255,255,.75)';for(const p of f){p.y+=p.s;p.x+=Math.sin(p.y/40)*.3;if(p.y>Hh){p.y=-5;p.x=Math.random()*W}x.beginPath();x.arc(p.x,p.y,p.r,0,6.3);x.fill()}requestAnimationFrame(l)})()})();
+</script>
+</body></html>
